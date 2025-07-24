@@ -21,7 +21,14 @@ physlib/
 
 Each package contains modules implementing key formulas. Functions in one package may call functions from others when the physics requires it. For example `work_done` in `energy.py` uses the `force` function from `newton.py` because work is defined in terms of force and distance.
 
-The library can serve as a starting point for building animations or simulations to visualise physics in 3D environments.
+The library can serve as a starting point for building animations or
+simulations to visualise physics in 3D environments.
+
+Each module includes detailed docstrings explaining the underlying
+physical principles, the meaning of each variable and the equations
+implemented.  Many docstrings contain links to external resources such
+as related [Wikipedia](https://en.wikipedia.org/wiki/Main_Page)
+articles for further reading.
 
 ## Example usage
 

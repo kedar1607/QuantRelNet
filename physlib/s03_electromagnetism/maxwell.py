@@ -1,10 +1,16 @@
-"""Maxwell's equations utilities."""
+"""Maxwell's equations utilities.
+
+The ``MaxwellSolver`` is a toy finite-difference integrator of the
+electromagnetic wave equation derived from Maxwell's curl equations.
+It illustrates how the electric field ``E`` and magnetic field ``B``
+propagate at the speed of light ``c``.
+"""
 
 import numpy as np
 
 
 class MaxwellSolver:
-    """Very simplified finite difference solver for wave equation."""
+    """Very simplified finite difference solver for the wave equation."""
 
     def __init__(self, c: float = 299_792_458.0):
         self.c = c

@@ -1,4 +1,13 @@
-"""Utilities for the Schrödinger equation."""
+"""Utilities for the Schrödinger equation.
+
+Provides a minimal finite-difference solver for the 1D time-dependent
+Schrödinger equation
+
+.. math:: i \hbar \frac{\partial \psi}{\partial t} = -\frac{\hbar^2}{2m}\nabla^2\psi + V(x)\psi.
+
+This example is purely educational and not meant for serious
+simulations.
+"""
 
 import numpy as np
 from typing import Callable
@@ -7,8 +16,8 @@ from typing import Callable
 class Schrodinger1D:
     """Solve the time-dependent Schrödinger equation in 1D.
 
-    This is a very small explicit finite difference demonstration and not
-    suitable for production use.
+    The scheme uses a simple explicit method and is unstable for large
+    time steps.  ``potential`` should return ``V(x)`` for an array ``x``.
     """
 
     def __init__(self, potential: Callable[[np.ndarray], np.ndarray], dx: float, dt: float):
@@ -19,7 +28,7 @@ class Schrodinger1D:
         self.m = 9.109_383_7015e-31  # electron mass
 
     def step(self, psi: np.ndarray) -> np.ndarray:
-        """Advance wave function by one time step."""
+        """Advance wave function ``psi`` by one time step ``dt``."""
         laplacian = (np.roll(psi, -1) - 2 * psi + np.roll(psi, 1)) / self.dx**2
         potential_term = self.potential(np.arange(len(psi)) * self.dx) * psi
         return psi + 1j * self.dt / (2 * self.hbar / self.m) * (laplacian - potential_term)

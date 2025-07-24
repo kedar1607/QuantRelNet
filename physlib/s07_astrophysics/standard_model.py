@@ -1,4 +1,8 @@
-"""Summary of particle masses in the Standard Model."""
+"""Summary of particle masses in the Standard Model.
+
+This file lists a small subset of elementary particles with their
+rest masses in gigaelectronvolts (GeV).
+"""
 
 from dataclasses import dataclass
 
