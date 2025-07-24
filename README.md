@@ -10,13 +10,13 @@ The code is intentionally lightweight so newcomers can read and modify it easily
 
 ```
 physlib/
-    classical_mechanics/
-    thermodynamics/
-    electromagnetism/
-    waves_optics/
-    relativity/
-    quantum_mechanics/
-    astrophysics/
+    s01_classical_mechanics/
+    s02_thermodynamics/
+    s03_electromagnetism/
+    s04_waves_optics/
+    s05_relativity/
+    s06_quantum_mechanics/
+    s07_astrophysics/
 ```
 
 Each package contains modules implementing key formulas. Functions in one package may call functions from others when the physics requires it. For example `work_done` in `energy.py` uses the `force` function from `newton.py` because work is defined in terms of force and distance.

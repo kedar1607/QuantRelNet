@@ -1,12 +1,12 @@
 """Example script demonstrating library usage."""
 
 import numpy as np
-from physlib.classical_mechanics import newton, energy, momentum, gravity
-from physlib.thermodynamics import laws, heat_transfer
-from physlib.electromagnetism import lorentz
-from physlib.waves_optics import wave_equation
-from physlib.relativity import special
-from physlib.quantum_mechanics import uncertainty
+from physlib.s01_classical_mechanics import newton, energy, momentum, gravity
+from physlib.s02_thermodynamics import laws, heat_transfer
+from physlib.s03_electromagnetism import lorentz
+from physlib.s04_waves_optics import wave_equation
+from physlib.s05_relativity import special
+from physlib.s06_quantum_mechanics import uncertainty
 
 
 # Classical mechanics

@@ -1,6 +1,6 @@
 """Black hole utilities."""
 
-from ..relativity.general import schwarzschild_radius
+from ..s05_relativity.general import schwarzschild_radius
 
 
 def event_horizon_area(mass: float) -> float:
