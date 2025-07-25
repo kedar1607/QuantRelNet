@@ -6,6 +6,7 @@ calculations and a two-body elastic collision in one dimension.
 """
 
 from dataclasses import dataclass
+import numpy as np
 
 
 def momentum(mass: float, velocity: float) -> float:
@@ -19,6 +20,11 @@ def momentum(mass: float, velocity: float) -> float:
         Velocity in metres per second.
     """
     return mass * velocity
+
+
+def momentum_vec(mass: float, velocity: np.ndarray) -> np.ndarray:
+    """Return momentum vector for motion in 3D."""
+    return mass * np.asarray(velocity)
 
 
 @dataclass
@@ -51,4 +57,28 @@ class Collision:
         new_v2 = ((2 * self.m1) / (self.m1 + self.m2)) * self.v1 + (
             (self.m2 - self.m1) / (self.m1 + self.m2)
         ) * self.v2
+        return new_v1, new_v2
+
+
+@dataclass
+class Collision3D:
+    """Elastic collision for particles with velocity vectors.
+
+    This simple extension applies the 1D formulas component-wise. It is
+    accurate only when the collision is head-on along the velocity
+    vectors but demonstrates momentum conservation in code.
+    """
+
+    m1: float
+    v1: np.ndarray
+    m2: float
+    v2: np.ndarray
+
+    def final_velocities(self) -> tuple[np.ndarray, np.ndarray]:
+        coeff1 = (self.m1 - self.m2) / (self.m1 + self.m2)
+        coeff2 = (2 * self.m2) / (self.m1 + self.m2)
+        coeff3 = (2 * self.m1) / (self.m1 + self.m2)
+        coeff4 = (self.m2 - self.m1) / (self.m1 + self.m2)
+        new_v1 = coeff1 * self.v1 + coeff2 * self.v2
+        new_v2 = coeff3 * self.v1 + coeff4 * self.v2
         return new_v1, new_v2

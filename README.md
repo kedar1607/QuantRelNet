@@ -24,6 +24,11 @@ Each package contains modules implementing key formulas. Functions in one packag
 The library can serve as a starting point for building animations or
 simulations to visualise physics in 3D environments.
 
+Many utilities now include both simple one-dimensional helpers and
+three-dimensional counterparts.  For instance ``Particle3D`` models a
+point mass with a velocity vector and ``wave_solution_3d`` generates a
+plane wave at an arbitrary position.
+
 Each module includes detailed docstrings explaining the underlying
 physical principles, the meaning of each variable and the equations
 implemented.  Many docstrings contain links to external resources such

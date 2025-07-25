@@ -5,7 +5,8 @@ definitions stem from the work-energy theorem and the conservation of
 energy.  Units are SI: kilograms, metres and seconds.
 """
 
-from .newton import force
+import numpy as np
+from .newton import force, force_vec
 
 
 def kinetic_energy(mass: float, velocity: float) -> float:
@@ -19,6 +20,12 @@ def kinetic_energy(mass: float, velocity: float) -> float:
         Speed :math:`v` in metres per second.
     """
     return 0.5 * mass * velocity ** 2
+
+
+def kinetic_energy_vec(mass: float, velocity: np.ndarray) -> float:
+    """Return kinetic energy for a velocity vector."""
+    speed = np.linalg.norm(velocity)
+    return 0.5 * mass * speed**2
 
 
 def potential_energy(mass: float, height: float, g: float = 9.81) -> float:
@@ -48,3 +55,9 @@ def work_done(mass: float, acceleration_val: float, distance: float) -> float:
     """
     f = force(mass, acceleration_val)
     return f * distance
+
+
+def work_done_vec(mass: float, acceleration_vec: np.ndarray, displacement: np.ndarray) -> float:
+    """Return work from vector force and displacement."""
+    f_vec = force_vec(mass, acceleration_vec)
+    return float(np.dot(f_vec, displacement))
