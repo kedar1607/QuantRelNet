@@ -11,6 +11,7 @@ overview.
 """
 
 from dataclasses import dataclass
+import numpy as np
 
 
 def acceleration(force: float, mass: float) -> float:
@@ -31,6 +32,19 @@ def acceleration(force: float, mass: float) -> float:
     return force / mass
 
 
+def acceleration_vec(force: np.ndarray, mass: float) -> np.ndarray:
+    """Return acceleration vector ``a = F/m`` for a force vector.
+
+    Parameters
+    ----------
+    force : numpy.ndarray
+        Net force vector in newtons.
+    mass : float
+        Object mass in kilograms.
+    """
+    return np.asarray(force) / mass
+
+
 def force(mass: float, acceleration: float) -> float:
     """Compute force :math:`F = m a`.
 
@@ -47,6 +61,11 @@ def force(mass: float, acceleration: float) -> float:
         Force in newtons.
     """
     return mass * acceleration
+
+
+def force_vec(mass: float, acceleration: np.ndarray) -> np.ndarray:
+    """Return force vector ``F = m a`` for a vector acceleration."""
+    return mass * np.asarray(acceleration)
 
 
 @dataclass
@@ -72,3 +91,23 @@ class Particle:
         :math:`Δv = (F/m) Δt`.
         """
         self.velocity += acceleration(force, self.mass) * time
+
+
+@dataclass
+class Particle3D:
+    """Particle moving in three dimensions.
+
+    Parameters
+    ----------
+    mass : float
+        Mass of the particle in kilograms.
+    velocity : numpy.ndarray
+        Initial velocity vector ``v`` in metres per second.
+    """
+
+    mass: float
+    velocity: np.ndarray
+
+    def apply_force(self, force: np.ndarray, time: float) -> None:
+        """Update velocity vector after constant force for ``time`` seconds."""
+        self.velocity = self.velocity + acceleration_vec(force, self.mass) * time

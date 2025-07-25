@@ -10,6 +10,8 @@ where ``G`` is the gravitational constant (``6.67430e-11`` in SI units),
 
 G = 6.67430e-11
 
+import numpy as np
+
 
 def gravitational_force(m1: float, m2: float, distance: float) -> float:
     """Return gravitational force ``F`` between ``m1`` and ``m2``.
@@ -22,6 +24,13 @@ def gravitational_force(m1: float, m2: float, distance: float) -> float:
         Separation ``r`` in metres.
     """
     return G * m1 * m2 / distance**2
+
+
+def gravitational_force_vector(m1: float, m2: float, r_vec: np.ndarray) -> np.ndarray:
+    """Return gravitational force vector between ``m1`` and ``m2`` separated by ``r_vec``."""
+    r = np.asarray(r_vec)
+    r_mag = np.linalg.norm(r)
+    return -G * m1 * m2 * r / r_mag**3
 
 
 def orbital_velocity(mass_central: float, radius: float) -> float:

@@ -32,3 +32,23 @@ class Schrodinger1D:
         laplacian = (np.roll(psi, -1) - 2 * psi + np.roll(psi, 1)) / self.dx**2
         potential_term = self.potential(np.arange(len(psi)) * self.dx) * psi
         return psi + 1j * self.dt / (2 * self.hbar / self.m) * (laplacian - potential_term)
+
+
+class Schrodinger3D:
+    """Very small 3D Schrödinger solver using finite differences."""
+
+    def __init__(self, potential: Callable[[tuple[int, int, int]], np.ndarray], dx: float, dt: float):
+        self.potential = potential
+        self.dx = dx
+        self.dt = dt
+        self.hbar = 1.054_571_817e-34
+        self.m = 9.109_383_7015e-31
+
+    def step(self, psi: np.ndarray) -> np.ndarray:
+        laplacian = (
+            np.roll(psi, -1, 0) + np.roll(psi, 1, 0)
+            + np.roll(psi, -1, 1) + np.roll(psi, 1, 1)
+            + np.roll(psi, -1, 2) + np.roll(psi, 1, 2) - 6 * psi
+        ) / self.dx**2
+        potential_term = self.potential(psi.shape) * psi
+        return psi + 1j * self.dt / (2 * self.hbar / self.m) * (laplacian - potential_term)
