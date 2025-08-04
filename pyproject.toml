@@ -11,4 +11,17 @@ requires-python = ">=3.9"
 license = {text = "MIT"}
 
 [project.optional-dependencies]
-examples = ["numpy"]
+examples = ["numpy>=1.24.0,<2.0"]
+visualization = [
+    "matplotlib>=3.7.0",
+    "numpy>=1.24.0,<2.0",
+    "scipy>=1.10.0",
+    "Pillow>=10.0.0"
+]
+dev = [
+    "matplotlib>=3.7.0",
+    "numpy>=1.24.0,<2.0",
+    "scipy>=1.10.0",
+    "Pillow>=10.0.0",
+    "jupyter>=1.0.0"
+]
